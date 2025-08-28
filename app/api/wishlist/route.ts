@@ -5,6 +5,9 @@ import Wishlist from '../../../models/Wishlist';
 import User from '../../../models/User';
 import { authOptions } from '../../../lib/auth';
 
+// Force dynamic rendering to prevent build-time execution
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);

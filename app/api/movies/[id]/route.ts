@@ -6,6 +6,9 @@ import Wishlist from '../../../../models/Wishlist';
 import { authOptions } from '../../../../lib/auth';
 import { deleteImageFromS3 } from '../../../../lib/s3';
 
+// Force dynamic rendering to prevent build-time execution
+export const dynamic = 'force-dynamic';
+
 export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

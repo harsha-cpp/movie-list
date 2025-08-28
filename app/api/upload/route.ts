@@ -3,6 +3,9 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../lib/auth';
 import { uploadImageToS3, getSignedImageUrl } from '../../../lib/s3';
 
+// Force dynamic rendering to prevent build-time execution
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   console.log('Upload API called');
   try {

@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { S3Client, ListBucketsCommand, HeadBucketCommand } from '@aws-sdk/client-s3';
 
+// Force dynamic rendering to prevent build-time execution
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     console.log('Testing S3 connection...');

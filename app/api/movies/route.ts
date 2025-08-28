@@ -4,6 +4,9 @@ import connectDB from '../../../lib/mongodb';
 import Movie from '../../../models/Movie';
 import { authOptions } from '../../../lib/auth';
 
+// Force dynamic rendering to prevent build-time execution
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     await connectDB();
