@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table';
 import { Badge } from '../../../components/ui/badge';
 import { Alert, AlertDescription } from '../../../components/ui/alert';
-import { LoadingPage } from '../../../components/ui/spinner';
+import { Spinner } from '../../../components/ui/spinner';
 import { IMovie } from '../../../models/Movie';
 import { Edit, Trash2, Plus } from 'lucide-react';
 
