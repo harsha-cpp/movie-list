@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table';
 import { Badge } from '../../../components/ui/badge';
 import { Alert, AlertDescription } from '../../../components/ui/alert';
-import { Spinner } from '../../../components/ui/spinner';
+
 import { IMovie } from '../../../models/Movie';
 
 interface WishlistEntry {
