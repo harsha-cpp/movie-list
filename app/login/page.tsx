@@ -26,11 +26,11 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-[600px]">
-      <Card className="w-full max-w-md">
+    <div className="flex justify-center items-center min-h-[500px] sm:min-h-[600px] px-4">
+      <Card className="w-full max-w-md mx-auto">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Welcome to MovieList</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-xl sm:text-2xl">Welcome to MovieList</CardTitle>
+          <CardDescription className="text-sm sm:text-base">
             Sign in with your Google account to start building your movie wishlist
           </CardDescription>
         </CardHeader>

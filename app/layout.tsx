@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "MovieList - Your Personal Movie Wishlist",
   description: "Discover and save your favorite movies to watch later",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
 };
 
 export default function RootLayout({
@@ -33,7 +34,7 @@ export default function RootLayout({
         <SessionProvider>
           <div className="min-h-screen bg-background flex flex-col">
             <Navbar />
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 flex-1 w-full">
               {children}
             </main>
             <Footer />

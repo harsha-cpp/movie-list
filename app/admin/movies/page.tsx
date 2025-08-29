@@ -122,17 +122,17 @@ export default function AdminMoviesPage() {
 
   return (
     <AdminGuard>
-      <div className="space-y-6 w-full">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Movie Management</h1>
+      <div className="space-y-4 sm:space-y-6 w-full">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <h1 className="text-2xl sm:text-3xl font-bold">Movie Management</h1>
           <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
             <DialogTrigger asChild>
-              <Button>
+              <Button className="w-full sm:w-auto">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Movie
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>Add New Movie</DialogTitle>
               </DialogHeader>
@@ -153,7 +153,7 @@ export default function AdminMoviesPage() {
 
         <div>
           <div className="mb-4">
-            <h2 className="text-xl font-semibold">All Movies ({movies.length})</h2>
+            <h2 className="text-lg sm:text-xl font-semibold">All Movies ({movies.length})</h2>
           </div>
           <div className="transition-all duration-300 ease-in-out">
             {loading ? (
@@ -170,47 +170,58 @@ export default function AdminMoviesPage() {
                 </div>
               </div>
             ) : (
-              <div className="overflow-x-auto rounded-lg border bg-white">
+              <div className="bg-white">
                 <Table className="w-full">
                   <TableHeader>
                     <TableRow>
                       <TableHead>Title</TableHead>
-                      <TableHead>Year</TableHead>
-                      <TableHead>Genre</TableHead>
-                      <TableHead>Rating</TableHead>
-                      <TableHead>Image</TableHead>
+                      <TableHead className="hidden sm:table-cell">Year</TableHead>
+                      <TableHead className="hidden md:table-cell">Genre</TableHead>
+                      <TableHead className="hidden lg:table-cell">Rating</TableHead>
+                      <TableHead className="hidden sm:table-cell">Image</TableHead>
                       <TableHead>Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {movies.map((movie) => (
                       <TableRow key={movie._id}>
-                        <TableCell className="font-medium">{movie.title}</TableCell>
-                        <TableCell>{movie.releaseYear}</TableCell>
-                        <TableCell>
+                        <TableCell className="font-medium">
+                          <div>
+                            <div>{movie.title}</div>
+                            <div className="text-xs text-gray-500 sm:hidden">
+                              {movie.releaseYear} • {movie.genre} • ⭐ {movie.rating}/10
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell className="hidden sm:table-cell">{movie.releaseYear}</TableCell>
+                        <TableCell className="hidden md:table-cell">
                           <Badge variant="secondary">{movie.genre}</Badge>
                         </TableCell>
-                        <TableCell>⭐ {movie.rating}/10</TableCell>
-                        <TableCell>
+                        <TableCell className="hidden lg:table-cell">⭐ {movie.rating}/10</TableCell>
+                        <TableCell className="hidden sm:table-cell">
                           <Badge variant={movie.imageUrl ? "default" : "outline"}>
                             {movie.imageUrl ? "✓ Image" : "No Image"}
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          <div className="flex gap-2">
+                          <div className="flex flex-col sm:flex-row gap-1 sm:gap-2">
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => openEditDialog(movie)}
+                              className="text-xs"
                             >
-                              <Edit className="h-4 w-4" />
+                              <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
+                              <span className="hidden sm:inline ml-1">Edit</span>
                             </Button>
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => handleDeleteMovie(movie._id)}
+                              className="text-xs"
                             >
-                              <Trash2 className="h-4 w-4" />
+                              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                              <span className="hidden sm:inline ml-1">Delete</span>
                             </Button>
                           </div>
                         </TableCell>
@@ -224,7 +235,7 @@ export default function AdminMoviesPage() {
         </div>
 
         <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Edit Movie</DialogTitle>
             </DialogHeader>

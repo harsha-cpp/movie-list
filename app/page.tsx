@@ -22,17 +22,17 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[600px] text-center">
-      <h1 className="text-4xl font-bold mb-4">Welcome to MovieList</h1>
-      <p className="text-xl text-gray-600 mb-8 max-w-2xl">
+    <div className="flex flex-col items-center justify-center min-h-[500px] sm:min-h-[600px] text-center px-4">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Welcome to MovieList</h1>
+      <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl leading-relaxed">
         Discover amazing movies and create your personal wishlist. 
         Keep track of movies you want to watch and never miss a great film again.
       </p>
       
       {!session ? (
-        <div className="space-y-4">
-          <Link href="/login">
-            <Button size="lg" className="px-8 py-3">
+        <div className="space-y-4 w-full max-w-sm">
+          <Link href="/login" className="block">
+            <Button size="lg" className="w-full sm:w-auto sm:px-8 py-3">
               Get Started - Sign In with Google
             </Button>
           </Link>
@@ -41,10 +41,10 @@ export default function Home() {
           </p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 w-full max-w-sm">
           <p className="text-lg">Welcome back, {session.user.name}!</p>
-          <Link href="/movies">
-            <Button size="lg" className="px-8 py-3">
+          <Link href="/movies" className="block">
+            <Button size="lg" className="w-full sm:w-auto sm:px-8 py-3">
               Browse Movies
             </Button>
           </Link>

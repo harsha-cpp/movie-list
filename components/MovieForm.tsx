@@ -92,15 +92,15 @@ export default function MovieForm({ movie, onSubmit, onCancel, isLoading = false
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle>{movie ? 'Edit Movie' : 'Add New Movie'}</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-xl sm:text-2xl">{movie ? 'Edit Movie' : 'Add New Movie'}</CardTitle>
+        <CardDescription className="text-sm sm:text-base">
           {movie ? 'Update the movie information below.' : 'Fill in the details to add a new movie.'}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Input
@@ -124,7 +124,7 @@ export default function MovieForm({ movie, onSubmit, onCancel, isLoading = false
             {errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="releaseYear">Release Year</Label>
               <Input
@@ -186,12 +186,12 @@ export default function MovieForm({ movie, onSubmit, onCancel, isLoading = false
             />
           </div>
 
-          <div className="flex gap-4 pt-4">
-            <Button type="submit" disabled={isLoading} className="flex-1">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
+            <Button type="submit" disabled={isLoading} className="w-full sm:flex-1">
               {isLoading ? 'Saving...' : movie ? 'Update Movie' : 'Add Movie'}
             </Button>
             {onCancel && (
-              <Button type="button" variant="outline" onClick={onCancel} disabled={isLoading}>
+              <Button type="button" variant="outline" onClick={onCancel} disabled={isLoading} className="w-full sm:w-auto">
                 Cancel
               </Button>
             )}

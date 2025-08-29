@@ -91,10 +91,10 @@ export default function MoviesPage() {
   }
 
   return (
-    <div className="space-y-6 w-full transition-all duration-300 ease-in-out">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">All Movies</h1>
-        <p className="text-gray-600">{loading ? '...' : `${movies.length} movies available`}</p>
+    <div className="space-y-4 sm:space-y-6 w-full transition-all duration-300 ease-in-out">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-4">
+        <h1 className="text-2xl sm:text-3xl font-bold">All Movies</h1>
+        <p className="text-sm sm:text-base text-gray-600">{loading ? '...' : `${movies.length} movies available`}</p>
       </div>
 
       {error && (
@@ -112,7 +112,7 @@ export default function MoviesPage() {
         </div>
       ) : movies.length === 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 min-h-[600px]">
-          <div className="col-span-full flex flex-col items-center justify-center py-20">
+          <div className="col-span-full flex flex-col items-center justify-center py-20 text-center px-4">
             <p className="text-gray-500">No movies available yet.</p>
             {session.user.isAdmin && (
               <p className="text-sm text-gray-400 mt-2">

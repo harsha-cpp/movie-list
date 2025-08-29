@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="flex flex-col items-center space-y-4">
           {/* Main Footer Text */}
           <div className="text-center">
@@ -15,10 +15,10 @@ export default function Footer() {
           </div>
 
           {/* Tech Stack Logos */}
-          <div className="flex items-center space-x-12">
+          <div className="flex items-center space-x-6 sm:space-x-8 md:space-x-12">
             {/* Next.js */}
-            <div className="flex flex-col items-center space-y-2 group cursor-pointer">
-              <div className="relative w-10 h-10 transition-transform group-hover:scale-110">
+            <div className="flex flex-col items-center space-y-1 sm:space-y-2 group cursor-pointer">
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 transition-transform group-hover:scale-110">
                 <Image
                   src="/nextjs-icon.png"
                   alt="Next.js"
@@ -30,8 +30,8 @@ export default function Footer() {
             </div>
 
             {/* MongoDB */}
-            <div className="flex flex-col items-center space-y-2 group cursor-pointer">
-              <div className="relative w-10 h-10 transition-transform group-hover:scale-110">
+            <div className="flex flex-col items-center space-y-1 sm:space-y-2 group cursor-pointer">
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 transition-transform group-hover:scale-110">
                 <Image
                   src="/mongodb.svg"
                   alt="MongoDB"
@@ -43,8 +43,8 @@ export default function Footer() {
             </div>
 
             {/* AWS */}
-            <div className="flex flex-col items-center space-y-2 group cursor-pointer">
-              <div className="relative w-10 h-10 transition-transform group-hover:scale-110">
+            <div className="flex flex-col items-center space-y-1 sm:space-y-2 group cursor-pointer">
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 transition-transform group-hover:scale-110">
                 <Image
                   src="/Amazon_Web_Services_Logo.svg.png"
                   alt="AWS"

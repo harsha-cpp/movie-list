@@ -78,10 +78,10 @@ export default function WishlistPage() {
   }
 
   return (
-    <div className="space-y-6 w-full transition-all duration-300 ease-in-out">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">My Wishlist</h1>
-        <p className="text-gray-600">{loading ? '...' : `${wishlistItems.length} movies in your wishlist`}</p>
+    <div className="space-y-4 sm:space-y-6 w-full transition-all duration-300 ease-in-out">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-4">
+        <h1 className="text-2xl sm:text-3xl font-bold">My Wishlist</h1>
+        <p className="text-sm sm:text-base text-gray-600">{loading ? '...' : `${wishlistItems.length} movies in your wishlist`}</p>
       </div>
 
       {error && (
@@ -91,23 +91,23 @@ export default function WishlistPage() {
       )}
 
       {loading ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 min-h-[600px]">
-          <div className="col-span-full flex flex-col items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mb-4"></div>
-            <p className="text-gray-600">Loading your wishlist...</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 min-h-[400px] sm:min-h-[600px]">
+          <div className="col-span-full flex flex-col items-center justify-center py-16 sm:py-20">
+            <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-gray-900 mb-3 sm:mb-4"></div>
+            <p className="text-gray-600 text-sm sm:text-base">Loading your wishlist...</p>
           </div>
         </div>
       ) : wishlistItems.length === 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 min-h-[600px]">
-          <div className="col-span-full flex flex-col items-center justify-center py-20">
-            <p className="text-gray-500">Your wishlist is empty.</p>
-            <p className="text-sm text-gray-400 mt-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 min-h-[400px] sm:min-h-[600px]">
+          <div className="col-span-full flex flex-col items-center justify-center py-16 sm:py-20 text-center px-4">
+            <p className="text-gray-500 text-sm sm:text-base">Your wishlist is empty.</p>
+            <p className="text-xs sm:text-sm text-gray-400 mt-2">
               Browse movies and add them to your wishlist to see them here.
             </p>
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 transition-all duration-300 ease-in-out">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 transition-all duration-300 ease-in-out">
           {wishlistItems
             .filter((item) => item.movieId) // Additional safety check
             .map((item) => (

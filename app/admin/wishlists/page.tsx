@@ -94,9 +94,9 @@ export default function AdminWishlistsPage() {
 
   return (
     <AdminGuard>
-      <div className="space-y-6 w-full">
+      <div className="space-y-4 sm:space-y-6 w-full">
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Wishlist Analytics</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold">Wishlist Analytics</h1>
         </div>
 
         {error && (
@@ -108,11 +108,11 @@ export default function AdminWishlistsPage() {
         {/* Movie Filter */}
         <div>
           <div className="mb-4">
-            <h2 className="text-xl font-semibold">Filter by Movie</h2>
+            <h2 className="text-lg sm:text-xl font-semibold">Filter by Movie</h2>
           </div>
           <div>
             <Select value={selectedMovieId} onValueChange={setSelectedMovieId}>
-              <SelectTrigger className="max-w-md">
+              <SelectTrigger className="w-full sm:max-w-md">
                 <SelectValue placeholder="Select a movie" />
               </SelectTrigger>
               <SelectContent>
@@ -131,7 +131,7 @@ export default function AdminWishlistsPage() {
         {selectedMovieId === 'all' && (
           <div>
             <div className="mb-4">
-              <h2 className="text-xl font-semibold">Movie Popularity</h2>
+              <h2 className="text-lg sm:text-xl font-semibold">Movie Popularity</h2>
             </div>
             <div className="transition-all duration-300 ease-in-out">
               {loading ? (
@@ -142,24 +142,31 @@ export default function AdminWishlistsPage() {
                   </div>
                 </div>
               ) : (
-                <div className="overflow-x-auto rounded-lg border bg-white">
+                <div className="bg-white">
                   <Table className="w-full">
                     <TableHeader>
                       <TableRow>
                         <TableHead>Movie</TableHead>
-                        <TableHead>Genre</TableHead>
-                        <TableHead>Year</TableHead>
+                        <TableHead className="hidden sm:table-cell">Genre</TableHead>
+                        <TableHead className="hidden md:table-cell">Year</TableHead>
                         <TableHead>Wishlist Count</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {getUniqueMoviesWithCounts().map((movie) => (
                         <TableRow key={movie._id}>
-                          <TableCell className="font-medium">{movie.title}</TableCell>
-                          <TableCell>
+                          <TableCell className="font-medium">
+                            <div>
+                              <div>{movie.title}</div>
+                              <div className="text-xs text-gray-500 sm:hidden">
+                                {movie.genre} • {movie.releaseYear}
+                              </div>
+                            </div>
+                          </TableCell>
+                          <TableCell className="hidden sm:table-cell">
                             <Badge variant="secondary">{movie.genre}</Badge>
                           </TableCell>
-                          <TableCell>{movie.releaseYear}</TableCell>
+                          <TableCell className="hidden md:table-cell">{movie.releaseYear}</TableCell>
                           <TableCell>
                             <Badge variant={movie.wishlistCount > 0 ? "default" : "outline"}>
                               {movie.wishlistCount} users
@@ -176,15 +183,15 @@ export default function AdminWishlistsPage() {
         )}
 
         {/* Detailed Wishlist Entries */}
-        <div>
-          <div className="mb-4">
-            <h2 className="text-xl font-semibold">
-              {selectedMovieId === 'all' 
-                ? `All Wishlist Entries (${wishlistData.length})`
-                : `Users who wishlisted this movie (${wishlistData.length})`
-              }
-            </h2>
-          </div>
+                  <div>
+            <div className="mb-4">
+              <h2 className="text-lg sm:text-xl font-semibold">
+                {selectedMovieId === 'all' 
+                  ? `All Wishlist Entries (${wishlistData.length})`
+                  : `Users who wishlisted this movie (${wishlistData.length})`
+                }
+              </h2>
+            </div>
           <div className="transition-all duration-300 ease-in-out">
             {loading ? (
               <div className="overflow-x-auto rounded-lg border bg-white min-h-[400px]">
@@ -205,25 +212,36 @@ export default function AdminWishlistsPage() {
                 </div>
               </div>
             ) : (
-              <div className="overflow-x-auto rounded-lg border bg-white">
+              <div className="bg-white">
                 <Table className="w-full">
                   <TableHeader>
                     <TableRow>
                       <TableHead>User</TableHead>
-                      <TableHead>Email</TableHead>
-                      {selectedMovieId === 'all' && <TableHead>Movie</TableHead>}
-                      <TableHead>Added On</TableHead>
+                      <TableHead className="hidden sm:table-cell">Email</TableHead>
+                      {selectedMovieId === 'all' && <TableHead className="hidden md:table-cell">Movie</TableHead>}
+                      <TableHead className="hidden lg:table-cell">Added On</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {wishlistData.map((entry) => (
                       <TableRow key={entry._id}>
-                        <TableCell className="font-medium">{entry.userId.name}</TableCell>
-                        <TableCell>{entry.userId.email}</TableCell>
+                        <TableCell className="font-medium">
+                          <div>
+                            <div>{entry.userId.name}</div>
+                            <div className="text-xs text-gray-500 sm:hidden">
+                              {entry.userId.email}
+                              {selectedMovieId === 'all' && (
+                                <span> • {entry.movieId.title}</span>
+                              )}
+                              <span> • {formatDate(entry.createdAt)}</span>
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell className="hidden sm:table-cell">{entry.userId.email}</TableCell>
                         {selectedMovieId === 'all' && (
-                          <TableCell>{entry.movieId.title}</TableCell>
+                          <TableCell className="hidden md:table-cell">{entry.movieId.title}</TableCell>
                         )}
-                        <TableCell>{formatDate(entry.createdAt)}</TableCell>
+                        <TableCell className="hidden lg:table-cell">{formatDate(entry.createdAt)}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
