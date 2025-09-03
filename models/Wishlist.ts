@@ -21,7 +21,7 @@ const WishlistSchema = new Schema<IWishlist>({
   timestamps: true,
 });
 
-// Compound index to ensure a user can't wishlist the same movie twice
+
 WishlistSchema.index({ userId: 1, movieId: 1 }, { unique: true });
 
 export default mongoose.models.Wishlist || mongoose.model<IWishlist>('Wishlist', WishlistSchema);

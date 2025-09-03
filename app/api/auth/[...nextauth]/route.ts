@@ -1,7 +1,6 @@
 import NextAuth from 'next-auth';
 import { authOptions } from '../../../../lib/auth';
 
-// Force dynamic rendering to prevent build-time execution
 export const dynamic = 'force-dynamic';
 
 const handler = NextAuth(authOptions);

@@ -6,7 +6,6 @@ import Wishlist from '../../../../models/Wishlist';
 import { authOptions } from '../../../../lib/auth';
 import { deleteImageFromS3 } from '../../../../lib/s3';
 
-// Force dynamic rendering to prevent build-time execution
 export const dynamic = 'force-dynamic';
 
 export async function PUT(
@@ -26,19 +25,16 @@ export async function PUT(
     const body = await request.json();
     const { title, description, releaseYear, genre, imageUrl, imageKey, rating } = body;
 
-    // Get the current movie to check for existing image
     const currentMovie = await Movie.findById(id);
     if (!currentMovie) {
       return NextResponse.json({ error: 'Movie not found' }, { status: 404 });
     }
 
-    // If there's a new image and different from current, delete the old one
     if (currentMovie.imageUrl && imageUrl && currentMovie.imageUrl !== imageUrl) {
       try {
         await deleteImageFromS3(currentMovie.imageUrl);
       } catch (error) {
         console.error('Error deleting old image from S3:', error);
-        // Continue with update even if S3 deletion fails
       }
     }
 
@@ -86,26 +82,21 @@ export async function DELETE(
 
     await connectDB();
     
-    // Get the movie first to access its image URL
     const movie = await Movie.findById(id);
     if (!movie) {
       return NextResponse.json({ error: 'Movie not found' }, { status: 404 });
     }
 
-    // Delete the image from S3 if it exists
     if (movie.imageUrl) {
       try {
         await deleteImageFromS3(movie.imageUrl);
       } catch (error) {
         console.error('Error deleting image from S3:', error);
-        // Continue with movie deletion even if S3 deletion fails
       }
     }
 
-    // Delete the movie from database
     await Movie.findByIdAndDelete(id);
 
-    // Clean up related wishlist entries
     const wishlistResult = await Wishlist.deleteMany({ movieId: id });
 
     return NextResponse.json({ 

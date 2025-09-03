@@ -33,7 +33,6 @@ export const authOptions: NextAuthOptions = {
           return true;
         } catch (error) {
           console.error('Error signing in:', error);
-          // Return true to allow sign-in even if database operations fail
           return true;
         }
       }
@@ -47,7 +46,6 @@ export const authOptions: NextAuthOptions = {
           if (dbUser) {
             session.user.id = dbUser._id.toString();
             
-            // Check admin status dynamically
             const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()) || [];
             const legacyAdminEmail = process.env.ADMIN_EMAIL;
             if (legacyAdminEmail) {

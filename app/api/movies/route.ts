@@ -4,15 +4,12 @@ import connectDB from '../../../lib/mongodb';
 import Movie from '../../../models/Movie';
 import { authOptions } from '../../../lib/auth';
 
-// Force dynamic rendering to prevent build-time execution
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
     await connectDB();
     const movies = await Movie.find({}).sort({ createdAt: -1 }).lean();
-    // Convert ObjectId to string for frontend compatibility
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const moviesWithStringId = movies.map((movie: any) => ({
       ...movie,
       _id: movie._id.toString()

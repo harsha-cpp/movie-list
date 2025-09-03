@@ -23,7 +23,6 @@ export default function MovieCard({
   const [isLoading, setIsLoading] = useState(false);
   const [currentImageUrl, setCurrentImageUrl] = useState(movie.imageUrl || '');
 
-  // Generate fresh signed URL if we have an imageKey but imageUrl is expired/missing
   useEffect(() => {
     const generateSignedUrl = async () => {
       if (movie.imageKey && (!movie.imageUrl || movie.imageUrl.includes('X-Amz-Expires'))) {

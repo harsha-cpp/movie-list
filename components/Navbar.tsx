@@ -30,14 +30,12 @@ export default function Navbar() {
     <nav className="border-b bg-background sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="text-xl font-bold">
               MovieList
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
             {session ? (
               <>
@@ -73,7 +71,6 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
             <Button
               variant="ghost"
@@ -86,7 +83,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200 bg-background">
             <div className="px-2 pt-2 pb-3 space-y-1">

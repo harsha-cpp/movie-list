@@ -6,8 +6,8 @@ export interface IMovie extends Document {
   description: string;
   releaseYear: number;
   genre: string;
-  imageUrl?: string; // Temporary signed S3 URL for the poster image
-  imageKey?: string; // S3 key for generating signed URLs and deletion
+  imageUrl?: string; 
+  imageKey?: string; 
   rating: number;
   createdAt: Date;
   updatedAt: Date;

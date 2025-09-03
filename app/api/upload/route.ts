@@ -3,7 +3,6 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../lib/auth';
 import { uploadImageToS3, getSignedImageUrl } from '../../../lib/s3';
 
-// Force dynamic rendering to prevent build-time execution
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
@@ -16,7 +15,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Check if user is admin
     if (!session.user.isAdmin) {
       return NextResponse.json({ error: 'Admin access required' }, { status: 403 });
     }
@@ -29,7 +27,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    // Validate file type
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
@@ -38,8 +35,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate file size (max 5MB)
-    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    const maxSize = 5 * 1024 * 1024;
     if (file.size > maxSize) {
       return NextResponse.json(
         { error: 'File too large. Maximum size is 5MB.' },
@@ -47,13 +43,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Convert file to buffer
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Upload to S3 (returns the S3 key)
     const imageKey = await uploadImageToS3(buffer, file.name, file.type);
 
-    // Generate a signed URL for immediate display
     const imageUrl = await getSignedImageUrl(imageKey);
 
     return NextResponse.json({

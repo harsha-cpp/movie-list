@@ -27,7 +27,7 @@ export default function AdminGuard({ children }: AdminGuardProps) {
   }
 
   if (!session) {
-    return null; // Will redirect via useEffect
+    return null;
   }
 
   if (!session.user.isAdmin) {

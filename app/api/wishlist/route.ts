@@ -5,7 +5,6 @@ import Wishlist from '../../../models/Wishlist';
 import User from '../../../models/User';
 import { authOptions } from '../../../lib/auth';
 
-// Force dynamic rendering to prevent build-time execution
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
@@ -27,7 +26,6 @@ export async function GET() {
       .populate('movieId')
       .sort({ createdAt: -1 });
 
-    // Filter out items where movieId is null (deleted movies) and clean them up
     const validItems = [];
     const orphanedIds = [];
 
@@ -39,7 +37,6 @@ export async function GET() {
       }
     }
 
-    // Clean up orphaned wishlist entries in the background
     if (orphanedIds.length > 0) {
       await Wishlist.deleteMany({ _id: { $in: orphanedIds } });
     }
@@ -72,7 +69,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Movie ID is required' }, { status: 400 });
     }
 
-    // Check if already in wishlist
     const existingItem = await Wishlist.findOne({ userId: user._id, movieId });
     if (existingItem) {
       return NextResponse.json({ error: 'Movie already in wishlist' }, { status: 400 });

@@ -2,9 +2,6 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-/**
- * Simplified connection with better error handling
- */
 let isConnected = false;
 
 async function connectDB() {
@@ -18,7 +15,7 @@ async function connectDB() {
 
   try {
     const opts = {
-      bufferCommands: true, // Enable buffering to prevent timing issues
+      bufferCommands: true,
       maxPoolSize: 10,
       serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 75000,
@@ -34,7 +31,6 @@ async function connectDB() {
     isConnected = true;
     console.log('MongoDB connected successfully');
     
-    // Handle connection events
     mongoose.connection.on('connected', () => {
       isConnected = true;
       console.log('MongoDB connected');

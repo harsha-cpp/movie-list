@@ -36,12 +36,12 @@ const UserSchema = new Schema<IUser>({
   timestamps: true,
 });
 
-// Pre-save hook to check if user is admin based on email
+
 UserSchema.pre('save', function(next) {
   const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()) || [];
   const legacyAdminEmail = process.env.ADMIN_EMAIL;
   
-  // Support both ADMIN_EMAILS (new) and ADMIN_EMAIL (legacy)
+
   if (legacyAdminEmail) {
     adminEmails.push(legacyAdminEmail);
   }

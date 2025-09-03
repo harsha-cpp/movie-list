@@ -38,7 +38,6 @@ export default function WishlistPage() {
       const response = await fetch('/api/wishlist');
       if (!response.ok) throw new Error('Failed to fetch wishlist');
       const data = await response.json();
-      // Filter out wishlist items with null or missing movieId
       const validItems = data.filter((item: WishlistItem) => item.movieId && item.movieId._id);
       setWishlistItems(validItems);
     } catch (error) {
@@ -74,7 +73,7 @@ export default function WishlistPage() {
   }
 
   if (!session) {
-    return null; // Will redirect via useEffect
+    return null; 
   }
 
   return (
@@ -109,7 +108,7 @@ export default function WishlistPage() {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 transition-all duration-300 ease-in-out">
           {wishlistItems
-            .filter((item) => item.movieId) // Additional safety check
+            .filter((item) => item.movieId) 
             .map((item) => (
               <MovieCard
                 key={item._id}

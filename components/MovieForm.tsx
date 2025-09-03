@@ -50,7 +50,6 @@ export default function MovieForm({ movie, onSubmit, onCancel, isLoading = false
       }
     }
     if (!formData.genre) newErrors.genre = 'Genre is required';
-    // Image is now optional since it can be uploaded later
     if (!formData.rating) {
       newErrors.rating = 'Rating is required';
     } else {

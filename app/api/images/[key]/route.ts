@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSignedImageUrl } from '../../../../lib/s3';
 
-// Force dynamic rendering to prevent build-time execution
 export const dynamic = 'force-dynamic';
 
 export async function GET(
@@ -15,10 +14,8 @@ export async function GET(
       return NextResponse.json({ error: 'Image key is required' }, { status: 400 });
     }
 
-    // Decode the key since it might be URL encoded
     const decodedKey = decodeURIComponent(key);
     
-    // Generate a fresh signed URL
     const signedUrl = await getSignedImageUrl(decodedKey);
 
     return NextResponse.json({ imageUrl: signedUrl });

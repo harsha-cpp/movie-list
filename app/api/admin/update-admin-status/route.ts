@@ -4,7 +4,6 @@ import { authOptions } from '../../../../lib/auth';
 import connectDB from '../../../../lib/mongodb';
 import User from '../../../../models/User';
 
-// Force dynamic rendering to prevent build-time execution
 export const dynamic = 'force-dynamic';
 
 export async function POST() {
@@ -17,7 +16,6 @@ export async function POST() {
 
     await connectDB();
     
-    // Get admin emails from environment variables
     const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()) || [];
     const legacyAdminEmail = process.env.ADMIN_EMAIL;
     if (legacyAdminEmail) {
@@ -28,13 +26,11 @@ export async function POST() {
       return NextResponse.json({ error: 'No admin emails configured' }, { status: 400 });
     }
 
-    // Update admin status for all users with admin emails
     const result = await User.updateMany(
       { email: { $in: adminEmails } },
       { $set: { isAdmin: true } }
     );
 
-    // Also remove admin status from users who shouldn't have it
     await User.updateMany(
       { email: { $nin: adminEmails }, isAdmin: true },
       { $set: { isAdmin: false } }

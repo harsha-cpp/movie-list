@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { S3Client, ListBucketsCommand, HeadBucketCommand } from '@aws-sdk/client-s3';
 
-// Force dynamic rendering to prevent build-time execution
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
@@ -19,13 +18,11 @@ export async function GET() {
       },
     });
 
-    // Test 1: List buckets (basic connectivity)
     console.log('Testing list buckets...');
     const listCommand = new ListBucketsCommand({});
     const listResult = await s3Client.send(listCommand);
     console.log('Available buckets:', listResult.Buckets?.map(b => b.Name));
 
-    // Test 2: Check if moviesdb-bucket exists
     console.log('Testing bucket access...');
     const headCommand = new HeadBucketCommand({ Bucket: 'moviesdb-bucket' });
     await s3Client.send(headCommand);

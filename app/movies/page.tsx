@@ -87,7 +87,7 @@ export default function MoviesPage() {
   }
 
   if (!session) {
-    return null; // Will redirect via useEffect
+    return null;
   }
 
   return (

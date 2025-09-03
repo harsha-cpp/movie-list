@@ -28,15 +28,13 @@ export default function ImageUpload({
   const handleFileSelect = async (file: File) => {
     if (!file) return;
 
-    // Validate file type
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
       setError('Invalid file type. Only JPEG, PNG, and WebP are allowed.');
       return;
     }
 
-    // Validate file size (max 5MB)
-    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    const maxSize = 5 * 1024 * 1024;
     if (file.size > maxSize) {
       setError('File too large. Maximum size is 5MB.');
       return;
@@ -104,7 +102,6 @@ export default function ImageUpload({
 
   return (
     <div className="space-y-4">
-      {/* Current Image Display */}
       {currentImageUrl && (
         <Card>
           <CardContent className="p-4">
@@ -137,7 +134,6 @@ export default function ImageUpload({
         </Card>
       )}
 
-      {/* Upload Area */}
       <Card
         className={`border-2 border-dashed transition-colors ${
           dragOver
@@ -175,14 +171,12 @@ export default function ImageUpload({
         </CardContent>
       </Card>
 
-      {/* Error Display */}
       {error && (
         <div className="p-3 bg-red-50 border border-red-200 rounded-md">
           <p className="text-sm text-red-600">{error}</p>
         </div>
       )}
 
-      {/* Hidden File Input */}
       <input
         ref={fileInputRef}
         type="file"

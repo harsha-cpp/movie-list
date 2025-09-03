@@ -34,11 +34,11 @@ export default function AdminWishlistsPage() {
   useEffect(() => {
     fetchMovies();
     fetchWishlistData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     fetchWishlistData();
-  }, [selectedMovieId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedMovieId]);
 
   const fetchMovies = async () => {
     try {
@@ -105,7 +105,6 @@ export default function AdminWishlistsPage() {
           </Alert>
         )}
 
-        {/* Movie Filter */}
         <div>
           <div className="mb-4">
             <h2 className="text-lg sm:text-xl font-semibold">Filter by Movie</h2>
@@ -127,7 +126,6 @@ export default function AdminWishlistsPage() {
           </div>
         </div>
 
-        {/* Movie Popularity Overview */}
         {selectedMovieId === 'all' && (
           <div>
             <div className="mb-4">
@@ -182,7 +180,6 @@ export default function AdminWishlistsPage() {
           </div>
         )}
 
-        {/* Detailed Wishlist Entries */}
                   <div>
             <div className="mb-4">
               <h2 className="text-lg sm:text-xl font-semibold">
