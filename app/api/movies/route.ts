@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import connectDB from '../../../lib/mongodb';
-import Movie from '../../../models/Movie';
+import Movie, { IMovie } from '../../../models/Movie';
 import { authOptions } from '../../../lib/auth';
 
 export const dynamic = 'force-dynamic';
@@ -10,9 +10,9 @@ export async function GET() {
   try {
     await connectDB();
     const movies = await Movie.find({}).sort({ createdAt: -1 }).lean();
-    const moviesWithStringId = movies.map((movie: any) => ({
+    const moviesWithStringId = movies.map((movie: Record<string, unknown>) => ({
       ...movie,
-      _id: movie._id.toString()
+      _id: (movie._id as { toString(): string }).toString()
     }));
     return NextResponse.json(moviesWithStringId);
   } catch (error) {

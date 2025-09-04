@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import AdminGuard from '../../../components/AdminGuard';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
@@ -31,15 +31,6 @@ export default function AdminWishlistsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchMovies();
-    fetchWishlistData();
-  }, []);
-
-  useEffect(() => {
-    fetchWishlistData();
-  }, [selectedMovieId]);
-
   const fetchMovies = async () => {
     try {
       const response = await fetch('/api/movies');
@@ -51,7 +42,7 @@ export default function AdminWishlistsPage() {
     }
   };
 
-  const fetchWishlistData = async () => {
+  const fetchWishlistData = useCallback(async () => {
     try {
       const url = selectedMovieId === 'all' 
         ? '/api/admin/wishlists' 
@@ -67,7 +58,16 @@ export default function AdminWishlistsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedMovieId]);
+
+  useEffect(() => {
+    fetchMovies();
+    fetchWishlistData();
+  }, [fetchWishlistData]);
+
+  useEffect(() => {
+    fetchWishlistData();
+  }, [selectedMovieId, fetchWishlistData]);
 
   const getMovieWishlistCount = (movieId: string) => {
     return wishlistData.filter(entry => entry.movieId._id === movieId).length;
